@@ -18,27 +18,36 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  Movie Tracker
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  Remember the movies you watched and how you felt about them in seconds.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  Movie tracker helps you remember what movies you've seen, how much you liked each movie, and which actors were in each movie.  Whether you're a movie buff or you regularly mix up movies in conversation this product is for you.
 
 ## Problem ##
   > Describe the problem your product solves.
+  Life is too complicated for you to be able to every movie you watch on your own. 
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  Easy to use interface to figure out which movies you've watched and how much you liked them.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  "Movie tracker helped me remember what it was like to watch Mean Girls for the first time."
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  Just go to the site and start adding movies.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  "After using MovieTracker I never forgot a movie I watched again"
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  "go to movietracker.com right now!"
