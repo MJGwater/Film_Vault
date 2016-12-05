@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
     <div className="header">
       <h1>Movie Tracker</h1>
-      <form>
+      <form className="movie-form">
         <div className="enter-movie">
           <label>Title: </label>
           <input type="text" name="titleInput" onChange={this.handleChange}></input>
