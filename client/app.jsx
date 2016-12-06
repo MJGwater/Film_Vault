@@ -20,22 +20,35 @@ class App extends React.Component {
   handleClick(event) {
     event.preventDefault();
     var movieTitle = this.state.titleInput;
+    var movieYear = this.state.yearInput;
     var movieRating = this.state.ratingInput;
     var movieComment = this.state.commentInput;
-    this.setState({titleInput: ''});
-    this.setState({yearInput: ''});
-    this.setState({ratingInput: ''});
-    this.setState({commentInput: ''});
-    console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
     $.ajax({
-      method: 'POST',
-      url: '/',
-      data: {'title': movieTitle, 
-        'rating': movieRating,
-        'comment': movieComment
+      method: 'GET',
+      url: 'http://www.omdbapi.com/?t=' + movieTitle + '&y=' + movieYear + '&plot=short&r=json',
+      success: (function(data) {
+        this.setState({titleInput: ''});
+        this.setState({yearInput: ''});
+        this.setState({ratingInput: ''});
+        this.setState({commentInput: ''});
+        console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
+        $.ajax({
+          method: 'POST',
+          url: '/',
+          data: {'title': movieTitle,
+            'year': movieYear, 
+            'rating': movieRating,
+            'comment': movieComment
+          },
+          success: function() {
+          }
+        });
+        this.displayMovies()
+      }).bind(this),
+      error: function(err){
+        throw 'not working. blame the api not me'
       }
     });
-    this.displayMovies();
   } 
 
   displayMovies() {
@@ -98,7 +111,7 @@ class App extends React.Component {
         {/*this.state.allMovies.reduce(function (a, b) { return (a.title || a) + ', ' + b.title; }, '')*/}
         {this.state.allMovies.map(function(movie, index){
           console.log(movie);
-          return (<li key={index}> {movie.title + ', ' + movie.rating + ', ' + movie.comment}</li>)
+          return (<li key={index}> {movie.title + ', ' + (movie.year || 'unknown year') + ', ' + movie.rating + ', ' + movie.comment}</li>)
         })}
       </ol>
     </div>
