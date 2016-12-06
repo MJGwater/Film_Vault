@@ -1,3 +1,4 @@
+/*
 var mongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/myproject';
 MongoClient.connect(url, function(err, db) {
@@ -6,7 +7,7 @@ MongoClient.connect(url, function(err, db) {
     db.close(); //if createValidatedMovies stays commented out make sure to keep this line
   })
 });
-
+*/
 
 
 /*
