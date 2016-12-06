@@ -15,7 +15,7 @@ var movieSchema = mongoose.Schema({
 var Movies = mongoose.model('Movies', movieSchema);
 
 module.exports.insertMovie = function(data, callback) {
-  var newMovie = new Movies({title: data.title, rating: data.rating, comment: data.comment});
+  var newMovie = new Movies({title: data.title, year: data.year, rating: data.rating, comment: data.comment, imdbRating: data.imdbRating});
   console.log('newMovie created', newMovie);
   newMovie.save(function(err, cb){
     if (err) {

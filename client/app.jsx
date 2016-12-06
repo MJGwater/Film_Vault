@@ -2,7 +2,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     console.log('this in constructor is: ', this);
-    this.state = {titleInput: '', ratingInput: '', commentInput: '', allMovies: []}; //not sure why I'd typed this
+    this.state = {titleInput: '', yearInput: '', ratingInput: '', commentInput: '', imdbRating: '', allMovies: []}; //not sure why I'd typed this
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -23,6 +23,7 @@ class App extends React.Component {
     var movieRating = this.state.ratingInput;
     var movieComment = this.state.commentInput;
     this.setState({titleInput: ''});
+    this.setState({yearInput: ''});
     this.setState({ratingInput: ''});
     this.setState({commentInput: ''});
     console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
@@ -54,7 +55,7 @@ class App extends React.Component {
       }
       })
     }
-
+/*
   getMovieInfo() {
     $.ajax({
       method: 'GET',
@@ -68,7 +69,7 @@ class App extends React.Component {
       }
     })
   }
-
+*/
   render() {
     return (
     <div className="header">
@@ -77,6 +78,10 @@ class App extends React.Component {
         <div className="enter-movie">
           <label>Title: </label>
           <input type="text" name="titleInput" onChange={this.handleChange} value={this.state.titleInput}></input>
+        </div>
+        <div className="enter-movie">
+          <label>Year: </label>
+          <input type="text" name="yearInput" onChange={this.handleChange} value={this.state.yearInput}></input>
         </div>
         <div className="enter-movie">
           <label>Rating: </label>
@@ -90,7 +95,11 @@ class App extends React.Component {
       </form>
       <h2>All Movies I've Seen</h2>
       <ol>
-        {this.state.allMovies.reduce(function (a, b) { return (a.title || a) + ', ' + b.title; }, '')}
+        {/*this.state.allMovies.reduce(function (a, b) { return (a.title || a) + ', ' + b.title; }, '')*/}
+        {this.state.allMovies.map(function(movie, index){
+          console.log(movie);
+          return (<li key={index}> {movie.title + ', ' + movie.rating + ', ' + movie.comment}</li>)
+        })}
       </ol>
     </div>
     );
