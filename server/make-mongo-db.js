@@ -1,3 +1,32 @@
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/moviesdb');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+});
+
+var movieSchema = mongoose.Schema({
+  title: String,
+  rating: Number,
+  comment: String
+})
+
+var Movies = mongoose.model('Movies', movieSchema);
+
+module.exports.insertMovie = function(data, callback) {
+  var newMovie = new Movies({title: data.title, rating: data.rating, comment: data.comment});
+  newMovie.save(function(err, cb){
+    if (err) {
+      return console.error(err);
+    }
+    callback();
+    db.close();
+    console.log('hits here');
+  });
+}  
+
+
 /*
 var mongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/myproject';
@@ -25,9 +54,11 @@ var createValidatedMovies = function(db, callback) {
 }
 */
 
+/*
 var insertAMovie = function(db, callback) {
   var collection = db.collection('movies');
   collection.insertOne({'title': ?, 'rating': ?, 'comment': ?}, function(err, cb){
     db.close();
   })
 }
+*/
