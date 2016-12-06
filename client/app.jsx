@@ -7,6 +7,11 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentWillMount() {
+    console.log('component will mount!');
+    this.displayMovies();
+  }
+
   handleChange(event) {
     console.log('this is, ', this, 'event is', event, 'event target is', event.target);
     this.setState({[event.target.name]: event.target.value});
@@ -29,7 +34,25 @@ class App extends React.Component {
         'comment': movieComment
       }
     });
-  }
+  } 
+
+  displayMovies() {
+      console.log('function starts');
+      $.ajax({
+      method: 'GET',
+      url: '/movies',
+      dataType: 'json',
+      success: (function(data){
+        console.log('data is: ', data);
+        console.log('this is: ', this);
+        this.setState({allMovies: data});
+        console.log('this.state', this.state);
+      }).bind(this),
+      error: function(err){
+        throw 'not working, here is why: ', err
+      }
+      })
+    }
 
   render() {
     return (
@@ -50,6 +73,7 @@ class App extends React.Component {
         </div>
         <button onClick={this.handleClick}>Submit</button>
       </form>
+      <h2>All Movies I've Seen</h2>
     </div>
     );
   }

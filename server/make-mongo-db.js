@@ -24,7 +24,17 @@ module.exports.insertMovie = function(data, callback) {
     db.close();
     console.log('hits here');
   });
-}  
+}
+
+module.exports.listAllMovies = function(cb) {
+  // console.log('Movies is: ', Movies.find());
+  Movies.find(function(err, data){
+    console.log('arguments is: ', arguments);
+    console.log('data in listAllMovies is: ', data);
+    cb(data);
+  })
+}
+
 
 
 /*
