@@ -1,19 +1,19 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this in constructor is: ', this);
+    // console.log('this in constructor is: ', this);
     this.state = {titleInput: '', yearInput: '', ratingInput: '', commentInput: '', imdbRating: '', allMovies: []}; //not sure why I'd typed this
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillMount() {
-    console.log('component will mount!');
+    // console.log('component will mount!');
     this.displayMovies();
   }
 
   handleChange(event) {
-    console.log('this is, ', this, 'event is', event, 'event target is', event.target);
+    // console.log('this is, ', this, 'event is', event, 'event target is', event.target);
     this.setState({[event.target.name]: event.target.value});
   }
 
@@ -31,14 +31,22 @@ class App extends React.Component {
         this.setState({yearInput: ''});
         this.setState({ratingInput: ''});
         this.setState({commentInput: ''});
-        console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
+        console.log('data that comes in from the api is: ', data);
+        // console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
         $.ajax({
           method: 'POST',
           url: '/',
           data: {'title': movieTitle,
-            'year': movieYear, 
+            'year': movieYear || data.Year, 
             'rating': movieRating,
-            'comment': movieComment
+            'comment': movieComment,
+            'metascore': data.Metascore,
+            'actors': data.Actors,
+            'plot': data.Plot,
+            'rated': data.Rated,
+            'genre': data.Genre,
+            'language': data.Language,
+            'runtime': data.Runtime 
           },
           success: function() {
           }
@@ -111,7 +119,7 @@ class App extends React.Component {
         {/*this.state.allMovies.reduce(function (a, b) { return (a.title || a) + ', ' + b.title; }, '')*/}
         {this.state.allMovies.map(function(movie, index){
           console.log(movie);
-          return (<li key={index}> {movie.title + ', ' + (movie.year || 'unknown year') + ', ' + movie.rating + ', ' + movie.comment}</li>)
+          return (<li key={index}> Title: {movie.title}, Year: {movie.year || 'unknown year'}, Rating: {movie.rating}, Review: {movie.comment}, Metascore: {movie.metascore}, Actors: {movie.actors}, Plot: {movie.plot}, Rated: {movie.rating}, Genre: {movie.genre}, Language: {movie.language}, Runtime: {movie.runtime}</li>)
         })}
       </ol>
     </div>

@@ -8,14 +8,22 @@ db.once('open', function() {
 
 var movieSchema = mongoose.Schema({
   title: String,
+  year: Number,
   rating: Number,
-  comment: String
+  comment: String,
+  metascore: Number,
+  actors: String,
+  plot: String,
+  rated: String,
+  genre: String,
+  language: String,
+  runtime: String
 })
 
 var Movies = mongoose.model('Movies', movieSchema);
 
 module.exports.insertMovie = function(data, callback) {
-  var newMovie = new Movies({title: data.title, year: data.year, rating: data.rating, comment: data.comment, imdbRating: data.imdbRating});
+  var newMovie = new Movies({title: data.title, year: data.year, rating: data.rating, comment: data.comment, metascore: data.metascore, actors: data.actors, plot: data.plot, rated: data.rated, genre: data.genre, language: data.language, runtime: data.runtime});
   console.log('newMovie created', newMovie);
   newMovie.save(function(err, cb){
     if (err) {
