@@ -15,11 +15,14 @@ class App extends React.Component {
   handleClick(event) {
     event.preventDefault();
     console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
-    /*
     return $.ajax({
       method: 'POST',
-      url: 
-    })*/
+      url: '/',
+      data: {'title': this.state.titleInput, 
+        'rating': this.state.ratingInput,
+        'comment': this.state.commentInput
+      }
+    });
   }
 
   render() {
