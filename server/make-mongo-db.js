@@ -16,12 +16,13 @@ var Movies = mongoose.model('Movies', movieSchema);
 
 module.exports.insertMovie = function(data, callback) {
   var newMovie = new Movies({title: data.title, rating: data.rating, comment: data.comment});
+  console.log('newMovie created', newMovie);
   newMovie.save(function(err, cb){
     if (err) {
       return console.error(err);
     }
+    console.log('movie is supposed to be saved now');
     callback();
-    db.close();
     console.log('hits here');
   });
 }

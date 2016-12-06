@@ -2,7 +2,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     console.log('this in constructor is: ', this);
-    this.state = {titleInput: '', ratingInput: '', commentInput: ''}; //not sure why I'd typed this
+    this.state = {titleInput: '', ratingInput: '', commentInput: '', allMovies: []}; //not sure why I'd typed this
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
@@ -26,7 +26,7 @@ class App extends React.Component {
     this.setState({ratingInput: ''});
     this.setState({commentInput: ''});
     console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
-    return $.ajax({
+    $.ajax({
       method: 'POST',
       url: '/',
       data: {'title': movieTitle, 
@@ -34,6 +34,7 @@ class App extends React.Component {
         'comment': movieComment
       }
     });
+    this.displayMovies();
   } 
 
   displayMovies() {
@@ -44,7 +45,7 @@ class App extends React.Component {
       dataType: 'json',
       success: (function(data){
         // console.log('data is: ', data);
-        // console.log('this is: ', this);
+        console.log('this is: ', this);
         this.setState({allMovies: data});
         // console.log('this.state', this.state);
       }).bind(this),
@@ -53,6 +54,20 @@ class App extends React.Component {
       }
       })
     }
+
+  getMovieInfo() {
+    $.ajax({
+      method: 'GET',
+      url: 'http://www.omdbapi.com/?t=' + 'this.state.title' + '&y=&plot=short&r=json',
+      dataType: 'json',
+      success: function(data){
+        this.setState('movieInfo', data);
+      },
+      error: function(err) {
+        throw 'the error is: ', err;
+      }
+    })
+  }
 
   render() {
     return (
@@ -75,6 +90,7 @@ class App extends React.Component {
       </form>
       <h2>All Movies I've Seen</h2>
       <ol>
+        {this.state.allMovies.reduce(function (a, b) { return (a.title || a) + ', ' + b.title; }, '')}
       </ol>
     </div>
     );
