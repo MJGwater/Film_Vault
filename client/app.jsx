@@ -43,10 +43,10 @@ class App extends React.Component {
       url: '/movies',
       dataType: 'json',
       success: (function(data){
-        console.log('data is: ', data);
-        console.log('this is: ', this);
+        // console.log('data is: ', data);
+        // console.log('this is: ', this);
         this.setState({allMovies: data});
-        console.log('this.state', this.state);
+        // console.log('this.state', this.state);
       }).bind(this),
       error: function(err){
         throw 'not working, here is why: ', err
@@ -74,6 +74,8 @@ class App extends React.Component {
         <button onClick={this.handleClick}>Submit</button>
       </form>
       <h2>All Movies I've Seen</h2>
+      <ol>
+      </ol>
     </div>
     );
   }
