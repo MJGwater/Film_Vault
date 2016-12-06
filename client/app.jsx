@@ -14,13 +14,16 @@ class App extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
+    var movieTitle = this.state.titleInput;
+    var movieRating = this.state.ratingInput;
+    var movieComment = this.state.commentInput;
     console.log('this is: ', this, 'this.state.titleInput', this.state.titleInput, 'this.state.ratingInput', this.state.ratingInput, 'this.state.commentInput', this.state.commentInput);
     return $.ajax({
       method: 'POST',
       url: '/',
-      data: {'title': this.state.titleInput, 
-        'rating': this.state.ratingInput,
-        'comment': this.state.commentInput
+      data: {'title': movieTitle, 
+        'rating': movieRating,
+        'comment': movieComment
       }
     });
   }
