@@ -2,14 +2,35 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
+// var session = require('express-session');
 var app = express();
 var db = require('./make-mongo-db.js');
 // console.log('db is: ', db);
 
-app.listen(8000);
 app.use(express.static('client'));
+/*
+app.use(sesssion({cookie: { 
+  secure: true 
+  } 
+}));
+*/
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+var loggedIn = true;
+
+/*
+app.get('/', function(request, response){
+  var options = {
+    root: __dirname + 'client/compiled/index.html'
+  if (loggedIn) {
+    console.log(__dirname);
+    // response.sendFile('/Users/student/Documents/hrsf50-mvp/client/compiled/index.html')
+    response.sendFile(path.join(__dirname, '..', 'client/compiled/index.html'))
+  }
+})
+*/
 
 app.post('/', function(request, response) {
   console.log('request data is: ', request.body);
@@ -23,6 +44,5 @@ app.get('/movies', function(request, response){
   });
 })
 
-
-
+app.listen(8000);
 
