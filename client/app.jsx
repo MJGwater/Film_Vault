@@ -9,6 +9,9 @@ class App extends React.Component {
 
   componentWillMount() {
     // console.log('component will mount!');
+    /*if (!this.state.loggedIn){
+      console.log('not logged in!');
+    } */
     this.displayMovies();
   }
 
@@ -76,6 +79,10 @@ class App extends React.Component {
       }
       })
     }
+
+  displayLogin() {
+    $.ajax
+  }
 /*
   getMovieInfo() {
     $.ajax({
