@@ -1,9 +1,9 @@
-##Synopsis
+# Film Vault #
+
+## Synopsis
 This app lets users track and rate their movies. Just go to the website to see a list of all the movies you've watched, your review of the movie and other movie information such as its cast, run-time and more!
 
-##Development
-
-###Dependencies
+### Dependencies
 MongoDB 2.2.22
 Express 4.14.0
 React 15.4.1
